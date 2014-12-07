@@ -1,55 +1,26 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<!-- 基本配置 -->
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.paoding</groupId>
-	<artifactId>paoding-rose-scanning</artifactId>
+	<artifactId>rose-portal</artifactId>
 	<packaging>jar</packaging>
 	<version>1.0-SNAPSHOT</version>
-	<name>paoding-rose-scanning</name>
-	<url>http://maven.apache.org</url>
-	
+	<name>paoding-rose-portal</name>
+
 	<properties>
-		<Implementation-Version>1.0-20100604</Implementation-Version>
+		<Implementation-Version>1.0-20100817</Implementation-Version>
 	</properties>
-	
-	<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<version>2.4</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>commons-logging</groupId>
-			<artifactId>commons-logging</artifactId>
-			<version>1.1.1</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring</artifactId>
-			<version>2.5.6.SEC02</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>commons-lang</groupId>
-			<artifactId>commons-lang</artifactId>
-			<version>2.4</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>commons-collections</groupId>
-			<artifactId>commons-collections</artifactId>
-			<version>3.2.1</version>
-			<scope>provided</scope>
-		</dependency>
-	</dependencies>
+
+	<!-- 开发人员说明 -->
+	<developers>
+		<developer>
+			<name>qieqie.wang</name>
+			<email>qieqie.wang@gmail.com</email>
+		</developer>
+	</developers>
+
 	<distributionManagement>
 		<repository>
 			<id>archiva.internal</id>
@@ -62,9 +33,8 @@
 			<url>http://repos.d.xiaonei.com/nexus/content/repositories/snapshots/</url>
 		</snapshotRepository>
 	</distributionManagement>
+	<!-- 构建配置 -->
 	<build>
-		<testSourceDirectory>src/test/java</testSourceDirectory>
-		<testOutputDirectory>target/test/WEB-INF/classes</testOutputDirectory>
 		<resources>
 			<resource>
 				<directory>${project.build.sourceDirectory}</directory>
@@ -104,8 +74,7 @@
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-resources-plugin
-				</artifactId>
+				<artifactId>maven-resources-plugin</artifactId>
 				<configuration>
 					<encoding>UTF-8</encoding>
 				</configuration>
@@ -116,7 +85,7 @@
 				<configuration>
 					<archive>
 						<manifestEntries>
-							<Implementation-Title>paoding-rose-scanning</Implementation-Title>
+							<Implementation-Title>paoding-rose-portal</Implementation-Title>
 							<Implementation-Version>${Implementation-Version}</Implementation-Version>
 						</manifestEntries>
 					</archive>
@@ -139,4 +108,38 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<!-- 依赖配置 -->
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.6</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.metaparadigm</groupId>
+			<artifactId>json-rpc</artifactId>
+			<version>1.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.0.1</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.paoding</groupId>
+			<artifactId>paoding-rose</artifactId>
+			<version>1.0-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
 </project>

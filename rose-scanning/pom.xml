@@ -1,53 +1,23 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-
-	<!-- 基本配置 -->
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.paoding</groupId>
-	<artifactId>paoding-rose-jade</artifactId>
+	<artifactId>rose-scanning</artifactId>
 	<packaging>jar</packaging>
-	<version>1.1-SNAPSHOT</version>
-	<name>paoding-rose-jade</name>
-
+	<version>1.0-SNAPSHOT</version>
+	<name>paoding-rose-scanning</name>
+	<url>http://maven.apache.org</url>
+	
 	<properties>
-		<Implementation-Version>1.0-20100729</Implementation-Version>
+		<Implementation-Version>1.0-20100604</Implementation-Version>
 	</properties>
-
-	<!-- 开发人员说明 -->
-	<developers>
-		<developer>
-			<name>wangzhiliang</name>
-			<email>qieqie.wang@gmail.com</email>
-		</developer>
-	</developers>
-
-	<!-- 依赖配置 -->
+	
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.6</version>
+			<version>3.8.1</version>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring</artifactId>
-			<version>2.5.6.SEC02</version>
-		</dependency>
-		<dependency>
-			<groupId>commons-lang</groupId>
-			<artifactId>commons-lang</artifactId>
-			<version>2.4</version>
-		</dependency>
-		<dependency>
-			<groupId>commons-logging</groupId>
-			<artifactId>commons-logging</artifactId>
-			<version>1.1.1</version>
-		</dependency>
-		<dependency>
-			<groupId>commons-jexl</groupId>
-			<artifactId>commons-jexl</artifactId>
-			<version>1.1</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -56,18 +26,30 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>net.paoding</groupId>
-			<artifactId>paoding-rose-scanning</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.1.1</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.hsqldb</groupId>
-			<artifactId>hsqldb</artifactId>
-			<version>2.0.0</version>
-			<scope>test</scope>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring</artifactId>
+			<version>2.5.6.SEC02</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.4</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+			<version>3.2.1</version>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
-
 	<distributionManagement>
 		<repository>
 			<id>archiva.internal</id>
@@ -80,26 +62,29 @@
 			<url>http://repos.d.xiaonei.com/nexus/content/repositories/snapshots/</url>
 		</snapshotRepository>
 	</distributionManagement>
-
-	<!-- 构建配置(只添加本项目特有的) -->
 	<build>
+		<testSourceDirectory>src/test/java</testSourceDirectory>
+		<testOutputDirectory>target/test/WEB-INF/classes</testOutputDirectory>
 		<resources>
 			<resource>
-				<directory>src/main/java</directory>
-				<includes>
-					<include>**/*.properties</include>
-					<include>**/*.xml</include>
-					<include>**/*.java</include>
-				</includes>
+				<directory>${project.build.sourceDirectory}</directory>
+				<excludes>
+					<exclude>.svn</exclude>
+					<exclude>log4j.*</exclude>
+				</excludes>
 			</resource>
 		</resources>
 		<testResources>
 			<testResource>
+				<directory>src/test/webapp</directory>
+				<targetPath>target/test</targetPath>
+				<filtering>true</filtering>
+			</testResource>
+			<testResource>
 				<directory>src/test/java</directory>
-				<includes>
-					<include>**/*.properties</include>
-					<include>**/*.xml</include>
-				</includes>
+				<excludes>
+					<exclude>.svn</exclude>
+				</excludes>
 			</testResource>
 		</testResources>
 		<plugins>
@@ -107,21 +92,20 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.3.2</version>
 				<configuration>
 					<source>1.6</source>
 					<target>1.6</target>
 					<verbose>true</verbose>
 					<encoding>UTF-8</encoding>
 					<compilerArguments>
-						<sourcepath>/src/main/java</sourcepath>
+						<sourcepath>${project.basedir}/src/main/java</sourcepath>
 					</compilerArguments>
 				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-resources-plugin</artifactId>
-				<version>2.4.3</version>
+				<artifactId>maven-resources-plugin
+				</artifactId>
 				<configuration>
 					<encoding>UTF-8</encoding>
 				</configuration>
@@ -129,23 +113,20 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
-				<version>2.3.1</version>
 				<configuration>
 					<archive>
 						<manifestEntries>
-							<Implementation-Title>rose-jade</Implementation-Title>
+							<Implementation-Title>paoding-rose-scanning</Implementation-Title>
 							<Implementation-Version>${Implementation-Version}</Implementation-Version>
 						</manifestEntries>
 					</archive>
 				</configuration>
 			</plugin>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
-				<version>2.1.2</version>
 				<configuration>
-					<include>src/main/java</include>
+					<includes>src/main/java</includes>
 				</configuration>
 				<executions>
 					<execution>
