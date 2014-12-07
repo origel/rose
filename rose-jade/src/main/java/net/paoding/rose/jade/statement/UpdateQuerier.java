@@ -17,6 +17,9 @@ package net.paoding.rose.jade.statement;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import net.paoding.rose.jade.annotation.ReturnGeneratedKeys;
@@ -81,7 +84,8 @@ public class UpdateQuerier implements Querier {
         DataAccess dataAccess = dataAccessProvider.getDataAccess(//
                 runtime.getMetaData(), runtime.getProperties());
         if (returnGeneratedKeys) {
-            ArrayList<Number> keys = new ArrayList<Number>(1);
+            //ArrayList<Number> keys = new ArrayList<Number>(1);
+            List<Map<String, Object>> keys = new ArrayList<Map<String, Object>>(1);
             KeyHolder generatedKeyHolder = new GeneratedKeyHolder(keys);
             dataAccess.update(runtime.getSQL(), runtime.getArgs(), generatedKeyHolder);
             if (keys.size() > 0) {
