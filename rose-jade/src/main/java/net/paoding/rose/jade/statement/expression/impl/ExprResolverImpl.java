@@ -9,10 +9,10 @@ import java.util.regex.Pattern;
 
 import net.paoding.rose.jade.statement.expression.ExprResolver;
 
-import org.apache.commons.jexl.Expression;
-import org.apache.commons.jexl.ExpressionFactory;
-import org.apache.commons.jexl.JexlContext;
-import org.apache.commons.jexl.JexlHelper;
+import org.apache.commons.jexl2.Expression;
+import org.apache.commons.jexl2.JexlContext;
+import org.apache.commons.jexl2.JexlEngine;
+import org.apache.commons.jexl2.ObjectContext;
 import org.apache.commons.lang.math.NumberUtils;
 
 /**
@@ -45,16 +45,17 @@ public class ExprResolverImpl implements ExprResolver {
     protected final Map<String, Object> mapConsts = new HashMap<String, Object>();
 
     // Common Jexl 上下文
-    protected final JexlContext context = JexlHelper.createContext();
+    protected final Map<String, Object> wrappMap = new HashMap<String, Object>();
+    protected final JexlEngine engine = new JexlEngine();
+    protected final JexlContext context = new ObjectContext<Object>(engine, wrappMap);
 
     /**
      * 构造表达式处理器。
      */
     @SuppressWarnings("unchecked")
     public ExprResolverImpl() {
-        Map map = context.getVars();
-        map.put(VAR_PREFIX, mapVars);
-        map.put(CONST_PREFIX, mapConsts);
+        context.set(VAR_PREFIX, mapVars);
+        context.set(CONST_PREFIX, mapConsts);
     }
 
     /**
@@ -198,7 +199,7 @@ public class ExprResolverImpl implements ExprResolver {
             builder.append(expression2.substring(index));
 
             // 编译表达式
-            expr = ExpressionFactory.createExpression(builder.toString());
+            expr = engine.createExpression(builder.toString());
             cache.putIfAbsent(expression2, expr);
         }
 
