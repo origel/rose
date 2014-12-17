@@ -20,6 +20,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import net.paoding.rose.util.PlaceHolderUtils;
 import net.paoding.rose.web.Invocation;
@@ -38,7 +39,7 @@ public class ModelImpl implements Model {
 
     private static Log logger = LogFactory.getLog(ModelImpl.class);
 
-    private Map<String, Object> map = new HashMap<String, Object>();
+    private Map<String, Object> map = new ConcurrentHashMap<String, Object>();
 
     private Invocation invocation;
 
@@ -70,9 +71,7 @@ public class ModelImpl implements Model {
         if (value instanceof String) {
             value = PlaceHolderUtils.resolve((String) value, invocation);
         }
-        synchronized (mutex) {
-            map.put(name, value);
-        }
+        map.put(name, value);
         if (logger.isDebugEnabled()) {
             logger.debug("add attribute to model: " + name + "=" + value);
         }
@@ -95,16 +94,12 @@ public class ModelImpl implements Model {
 
     @Override
     public boolean contains(String name) {
-        synchronized (mutex) {
-            return map.containsKey(name);
-        }
+        return map.containsKey(name);
     }
 
     @Override
     public Object get(String name) {
-        synchronized (mutex) {
-            return map.get(name);
-        }
+        return map.get(name);
     }
 
     @Override
@@ -125,9 +120,7 @@ public class ModelImpl implements Model {
         if (name == null) {
             return this;
         }
-        synchronized (mutex) {
-            map.remove(name);
-        }
+        map.remove(name);
         return this;
     }
 
