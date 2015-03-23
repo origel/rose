@@ -21,6 +21,7 @@ import static net.paoding.rose.RoseConstants.CONF_MODULE_IGNORED;
 import static net.paoding.rose.RoseConstants.CONF_MODULE_PATH;
 import static net.paoding.rose.RoseConstants.CONF_PARENT_MODULE_PATH;
 import static net.paoding.rose.RoseConstants.CONTROLLERS;
+import static net.paoding.rose.RoseConstants.CONTROLLER;
 
 import java.io.File;
 import java.io.IOException;
@@ -144,7 +145,7 @@ public class ModuleResourceProviderImpl implements ModuleResourceProvider {
     }
 
     protected void deepScanImpl(Local local, FileObject root, FileObject target) throws IOException {
-        if (CONTROLLERS.equals(target.getName().getBaseName())) {
+        if (CONTROLLERS.equals(target.getName().getBaseName())||CONTROLLER.equals(target.getName().getBaseName())) {
             checkModuleResourceCandidate(local, root, target, target);
         } else {
             FileObject[] children = target.getChildren();
