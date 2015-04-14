@@ -66,7 +66,7 @@ public class PipeInterceptor extends ControllerInterceptorAdapter {
                 deadline = -1;
             }
 
-            try {
+            /*try {
                 for (Window window : pipe.getWindows()) {
                     if (window.get(RoseConstants.PIPE_WINDOW_IN) != Boolean.TRUE) {
                         synchronized (window) {
@@ -101,7 +101,7 @@ public class PipeInterceptor extends ControllerInterceptorAdapter {
                 }
             } catch (InterruptedException e) {
                 logger.error("window-in waiting is interruptted.", e);
-            }
+            }*/
             //
             if (logger.isDebugEnabled()) {
                 logger.debug(pipe + ".window-in is done; cost="
@@ -141,6 +141,7 @@ public class PipeInterceptor extends ControllerInterceptorAdapter {
 
             pipe.write(inv.getResponse().getWriter());
 
+            inv.getResponse().getWriter().write("</html>");
             if (logger.isDebugEnabled()) {
                 logger.debug("writing " + pipe + "... done");
             }

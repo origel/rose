@@ -38,7 +38,7 @@ public interface Pipe extends WindowContainer {
     public void addCssTo(String windowName, String css);
 
     /**
-     * 将一个css地址注册到window，使得客户端得到Window时候能够执行该javascripte
+     * 将一个css地址注册到window，使得客户端得到Window时候能够执行该javascript
      * 
      * @param windowName
      * @param js
