@@ -126,5 +126,10 @@
 			<version>1.0-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>1.0</version>
+		</dependency>
 	</dependencies>
 </project>

@@ -112,7 +112,13 @@ public class PipeInterceptor extends ControllerInterceptorAdapter {
         return instruction;
     }
 
-    // 针对vm，通过afterCompletion我们可以做到自动写pipe
+    @Override
+	protected Object before(Invocation inv) throws Exception {
+    	inv.addModel(RoseConstants.WINDOW_PIPE_PARAM, "on");
+		return super.before(inv);
+	}
+
+	// 针对vm，通过afterCompletion我们可以做到自动写pipe
     // 对于jsp，则这个代码不会生效(isStarted会返回true)
     @Override
     public void afterCompletion(Invocation inv, Throwable ex) throws Exception {

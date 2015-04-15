@@ -91,4 +91,6 @@ public interface RoseConstants {
 
     public static final String WINDOW_ATTR = "$$paoding-rose-portal.window";
 
+    public static final String WINDOW_PIPE_PARAM = "rose_pipe_window";
+
 }
