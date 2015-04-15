@@ -147,7 +147,7 @@ public class PipeInterceptor extends ControllerInterceptorAdapter {
 
             pipe.write(inv.getResponse().getWriter());
 
-            inv.getResponse().getWriter().write("</html>");
+            inv.getResponse().getWriter().write("</body></html>");
             if (logger.isDebugEnabled()) {
                 logger.debug("writing " + pipe + "... done");
             }
